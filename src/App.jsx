@@ -2,35 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Shield, TrendingUp, Globe, Layers, ArrowRight, Activity, Cpu, Lock, X, Menu, ChevronDown, Coins, ArrowLeftRight } from 'lucide-react';
 import * as THREE from 'three';
 
-// --- 1. Logo Component (Pixel Perfect Recreation) ---
+// --- 1. Logo Component (Updated: Image Only) ---
 const Logo = () => (
-  <div className="flex items-center gap-4 select-none group">
-    {/* The Symbol: From Void (Blur) to Solid */}
-    <div className="relative w-16 h-10 flex items-center justify-end">
-      {/* 1. The "Virtual" Trail (Left side blur) */}
-      <div 
-        className="absolute right-0 w-16 h-8 bg-gradient-to-l from-white to-transparent opacity-40 blur-md transform -translate-x-2 group-hover:-translate-x-4 transition-transform duration-700 ease-out"
-        style={{ clipPath: 'polygon(0% 10%, 100% 0%, 100% 100%, 0% 90%)' }} // Tapered shape
-      ></div>
-      
-      {/* 2. The "Motion" Mid-layer (Connecting blur) */}
-      <div className="absolute right-2 w-8 h-8 bg-gradient-to-l from-white/80 to-transparent blur-[2px]"></div>
-
-      {/* 3. The "Real" Solid Object (Right side square) */}
-      <div className="relative z-10 w-8 h-8 bg-white shadow-[0_0_15px_rgba(255,255,255,0.3)]"></div>
-    </div>
-
-    {/* The Typography */}
-    <div className="flex flex-col justify-center">
-      <div className="font-serif text-2xl font-bold text-white leading-none tracking-wide">
-        Unified
-      </div>
-      {/* The Separator Line */}
-      <div className="h-[2px] w-full bg-white my-[2px] origin-left transform group-hover:scale-x-110 transition-transform duration-500"></div>
-      <div className="font-serif text-2xl font-bold text-white leading-none tracking-wide">
-        Labs
-      </div>
-    </div>
+  <div className="flex items-center select-none cursor-pointer">
+    {/* 既然图片中已经包含了 "Unified Labs" 文字，
+        这里我们只需要展示图片即可，不需要额外的 HTML 文本。
+        
+        请确保 logo.png 已经放在 public 目录或项目根目录下。
+    */}
+    <img 
+      src="./logo.png" 
+      alt="Unified Labs" 
+      className="h-12 md:h-16 w-auto object-contain"
+    />
   </div>
 );
 
@@ -182,7 +166,7 @@ const Nav = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20"> {/* Increased height slightly for bigger logo */}
           <Logo />
           
           <div className="hidden md:flex space-x-12 items-center">
