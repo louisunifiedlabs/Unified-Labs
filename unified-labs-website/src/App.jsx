@@ -265,17 +265,14 @@ export default function App() {
             <span className="italic font-light opacity-80">Engineered.</span>
           </h1>
 
-          <div className="flex flex-col md:flex-row gap-12 items-start md:items-end border-l-2 border-white/20 pl-8 ml-2">
+          <div className="flex flex-col md:flex-row gap-12 items-start md:items-end justify-between border-l-2 border-white/20 pl-8 ml-2">
             <p className="max-w-xl text-lg text-gray-400 leading-relaxed">
               Unified Labs bridges the divide between <span className="text-white font-bold">Traditional Finance</span> solidity and <span className="text-white font-bold">DeFi</span> agility. We curate risk, make markets, and engineer the future of yield.
             </p>
-            
-            <button className="group flex items-center gap-4 text-white font-bold tracking-widest uppercase text-sm hover:text-gray-300 transition-colors">
-              Explore The Platform
-              <span className="p-2 border border-white/30 rounded-full group-hover:border-white group-hover:rotate-45 transition-all duration-300">
-                <ArrowRight size={16} />
-              </span>
-            </button>
+
+            <a href="#contact" className="px-8 py-3 bg-white text-black font-serif font-bold text-sm hover:bg-gray-200 transition-colors tracking-wide">
+              CONTACT US
+            </a>
           </div>
         </div>
 

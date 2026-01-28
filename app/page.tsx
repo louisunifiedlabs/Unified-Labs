@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Shield, TrendingUp, Globe, ArrowRight, ChevronDown, Coins } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
@@ -93,17 +94,17 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-12 items-start md:items-end border-l border-white/20 pl-8 ml-2 mt-12">
+          <div className="flex flex-col md:flex-row gap-12 items-start md:items-end justify-between border-l border-white/20 pl-8 ml-2 mt-12">
             <p className="max-w-xl text-lg md:text-xl text-gray-400 leading-relaxed font-light">
               Unified Labs delivers institutional risk strategies and liquidity infrastructure—optimal onchain allocation for every dollar deployed.
             </p>
 
-            <button className="group flex items-center gap-4 text-white font-bold tracking-[0.15em] uppercase text-xs md:text-sm hover:text-gray-300 transition-colors">
-              Explore The Platform
-              <span className="p-3 border border-white/20 rounded-full group-hover:border-white group-hover:rotate-45 transition-all duration-300 bg-white/5">
-                <ArrowRight size={16} />
-              </span>
-            </button>
+            <Link
+              href="/contact"
+              className="px-8 py-3 bg-white text-black font-serif font-bold text-sm hover:bg-gray-200 transition-colors tracking-wide"
+            >
+              CONTACT US
+            </Link>
           </div>
         </div>
 
