@@ -42,14 +42,14 @@ export default function AboutPage() {
                 <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">Our Purpose</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-white leading-tight mb-6">
-                Our purpose is becoming the strategy engine and liquidity hub for onchain asset allocation.
+                Our purpose is building the infrastructure for institutional DeFi adoption.
               </h2>
               <div className="flex items-center gap-3 mb-6 mt-12">
                 <Eye className="w-5 h-5 text-cyan-400" />
                 <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">Our Vision</span>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                We have a vision to empower everyone with institutional-grade risk strategies and liquidity services to lower the barriers and risks of onchain investing—every dollar finds its optimal allocation.
+                We have a vision to bridge traditional finance and decentralized protocols, empowering institutions with the risk management and liquidity tools they need to participate in the future of finance.
               </p>
             </div>
           </div>
