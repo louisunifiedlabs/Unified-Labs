@@ -245,16 +245,6 @@ const Card = ({ title, desc, icon: Icon, features, step }) => (
   </div>
 );
 
-// Updated Data Stat Item to handle text values gracefully
-const DataStat = ({ value, label, subValue }) => (
-  <div className="flex flex-col">
-    <div className={`font-serif font-bold text-white mb-1 tracking-tight ${value === 'Coming Soon' ? 'text-xl text-cyan-400 font-mono tracking-normal' : 'text-3xl lg:text-4xl'}`}>
-      {value}
-    </div>
-    <div className="text-sm text-gray-500 font-sans">{label}</div>
-    {subValue && <div className="text-xs text-gray-600 font-mono mt-1">{subValue}</div>}
-  </div>
-);
 
 export default function App() {
   return (
@@ -291,51 +281,6 @@ export default function App() {
 
         <div className="absolute bottom-10 left-0 w-full text-center animate-bounce opacity-50">
           <ChevronDown className="mx-auto" />
-        </div>
-      </section>
-
-      {/* --- DATA STREAM SECTION (UPDATED: Compact & Coming Soon) --- */}
-      <section className="relative z-10 bg-black/60 backdrop-blur-xl border-y border-white/10 py-12">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
-            
-            {/* Column 1: Digital Assets */}
-            <div>
-              <h3 className="text-white font-sans text-xs uppercase tracking-[0.2em] font-medium mb-6 pb-2 border-b border-gray-800">
-                Digital Assets
-              </h3>
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-baseline gap-3 mb-1">
-                    <span className="text-3xl font-serif font-bold text-white">AuM</span>
-                    <span className="text-sm font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-900/20 border border-cyan-900/50">Coming Soon</span>
-                  </div>
-                  <div className="text-gray-500 text-sm tracking-wide">Assets under Management</div>
-                </div>
-                <div>
-                  <div className="flex items-baseline gap-3 mb-1">
-                    <span className="text-3xl font-serif font-bold text-white">TVL</span>
-                    <span className="text-sm font-mono text-cyan-400 px-2 py-0.5 rounded bg-cyan-900/20 border border-cyan-900/50">Coming Soon</span>
-                  </div>
-                  <div className="text-gray-500 text-sm tracking-wide">Total Value Locked</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 2: Operating Ecosystem */}
-            <div>
-              <h3 className="text-white font-sans text-xs uppercase tracking-[0.2em] font-medium mb-6 pb-2 border-b border-gray-800">
-                Operating Ecosystem
-              </h3>
-              <div className="grid grid-cols-2 gap-y-8 gap-x-8">
-                <DataStat value="Coming Soon" label="Underlying blockchains" />
-                <DataStat value="Coming Soon" label="Whitelisted protocols" />
-                <DataStat value="Coming Soon" label="Monthly on-chain volume" />
-                <DataStat value="Coming Soon" label="Curated vaults" />
-              </div>
-            </div>
-
-          </div>
         </div>
       </section>
 
