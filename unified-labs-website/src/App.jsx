@@ -270,12 +270,12 @@ export default function App() {
               Unified Labs bridges the divide between <span className="text-white font-bold">Traditional Finance</span> solidity and <span className="text-white font-bold">DeFi</span> agility. We curate risk, make markets, and engineer the future of yield.
             </p>
             
-            <button className="group flex items-center gap-4 text-white font-bold tracking-widest uppercase text-sm hover:text-gray-300 transition-colors">
-              Explore The Platform
+            <a href="#contact" className="group flex items-center gap-4 text-white font-bold tracking-widest uppercase text-sm hover:text-gray-300 transition-colors">
+              Contact Us
               <span className="p-2 border border-white/30 rounded-full group-hover:border-white group-hover:rotate-45 transition-all duration-300">
                 <ArrowRight size={16} />
               </span>
-            </button>
+            </a>
           </div>
         </div>
 
