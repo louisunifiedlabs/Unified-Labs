@@ -98,12 +98,12 @@ export default function HomePage() {
               Unified Labs delivers institutional risk strategies and liquidity infrastructure—optimal onchain allocation for every dollar deployed.
             </p>
 
-            <a href="#contact" className="group flex items-center gap-4 text-white font-bold tracking-[0.15em] uppercase text-xs md:text-sm hover:text-gray-300 transition-colors">
-              Contact Us
+            <button className="group flex items-center gap-4 text-white font-bold tracking-[0.15em] uppercase text-xs md:text-sm hover:text-gray-300 transition-colors">
+              Explore The Platform
               <span className="p-3 border border-white/20 rounded-full group-hover:border-white group-hover:rotate-45 transition-all duration-300 bg-white/5">
                 <ArrowRight size={16} />
               </span>
-            </a>
+            </button>
           </div>
         </div>
 
