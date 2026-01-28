@@ -278,47 +278,32 @@ export default function App() {
       </section>
 
 
-      {/* --- CORE BUSINESS --- */}
-      <section id="services" className="relative z-10 py-32">
+      {/* --- NEWS PREVIEW SECTION --- */}
+      <section id="news" className="relative z-10 py-32">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-24 flex flex-col md:flex-row justify-between items-end border-b border-white/10 pb-8">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold">
-              The Unified <br /> Architecture
-            </h2>
-            <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mt-4 md:mt-0">
-              Four Pillars of Infrastructure
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/10 pb-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">Latest Updates</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold">
+                News
+              </h2>
+            </div>
+            <a
+              href="/news"
+              className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mt-6 md:mt-0"
+            >
+              View All
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24">
-            <Card 
-              step="1"
-              title="Risk Curator" 
-              icon={Shield}
-              desc="Providing institutional-grade curation services similar to Gauntlet. We curate risks, optimize parameters dynamically for customers, and offer Curator-as-a-Service."
-              features={["Vault Curation (Morpho/Aave)", "Curator-as-a-Service", "Dynamic Parameter Optimization"]}
-            />
-            <Card 
-              step="2"
-              title="Market Making" 
-              icon={TrendingUp}
-              desc="Providing deep liquidity where it matters. Our algo-trading infrastructure bridges CEX and DEX liquidity across Asia-Pacific markets."
-              features={["Launch Day Liquidity", "Delta Neutral Strategy", "Cross-Venue Arbitrage"]}
-            />
-            <Card 
-              step="3"
-              title="Advisory" 
-              icon={Globe}
-              desc="Guiding institutions through the digital transition. Strategic consultancy for RWA tokenization and treasury management."
-              features={["RWA Tokenization", "Treasury Management", "Risk Curator"]}
-            />
-            <Card 
-              step="4"
-              title="Asset Management" 
-              icon={Coins}
-              desc="Proprietary active management for digital assets. We leverage quantitative strategies to capture on-chain alpha and maximize risk-adjusted returns."
-              features={["Proprietary Quant Strategies", "Active Yield Management", "Multi-Chain Alpha Capture"]}
-            />
+          {/* News placeholder - connect to your CMS */}
+          <div className="text-center py-20 border border-white/10">
+            <p className="text-gray-400 text-lg font-serif">News coming soon</p>
+            <p className="text-gray-600 mt-2 font-mono text-sm">Check back for updates</p>
           </div>
         </div>
       </section>
