@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-8 text-gray-400 leading-relaxed text-sm font-light">
-              Bridging Institutions to Onchain Finance. We combine deep liquidity networks with rigorous risk curation to deliver optimal onchain allocation.
+              Bridging Institutions to Onchain Finance.
             </p>
           </div>
 
@@ -18,9 +18,6 @@ export default function Footer() {
               <h4 className="font-serif font-bold text-lg mb-8">Business</h4>
               <ul className="space-y-5 text-gray-500 text-sm font-medium tracking-wide">
                 <li><Link href="/#services" className="hover:text-white transition-colors">Risk Curator</Link></li>
-                <li><Link href="/#services" className="hover:text-white transition-colors">Market Making</Link></li>
-                <li><Link href="/#services" className="hover:text-white transition-colors">Advisory</Link></li>
-                <li><Link href="/#services" className="hover:text-white transition-colors">Asset Management</Link></li>
               </ul>
             </div>
             <div>
