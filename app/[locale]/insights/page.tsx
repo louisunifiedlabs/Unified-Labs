@@ -4,6 +4,7 @@ import { supabase, Post } from '@/lib/supabase'
 import { Clock, User, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60
 
@@ -23,8 +24,8 @@ async function getInsights() {
   return data || []
 }
 
-// Featured Insight Card (大卡片，用于第一篇)
-function FeaturedInsightCard({ post }: { post: Post }) {
+// Featured Insight Card
+function FeaturedInsightCard({ post, t }: { post: Post; t: (key: string) => string }) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -50,7 +51,7 @@ function FeaturedInsightCard({ post }: { post: Post }) {
         <div className="flex flex-col justify-center">
           <div className="flex items-center gap-4 text-xs text-gray-500 mb-4 font-mono uppercase tracking-wider">
             <span className="px-2 py-1 border border-cyan-500/30 text-cyan-400 rounded">
-              Featured
+              {t('featured')}
             </span>
             <span>{post.category}</span>
           </div>
@@ -73,7 +74,7 @@ function FeaturedInsightCard({ post }: { post: Post }) {
             {post.read_time && (
               <span className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                {post.read_time} min read
+                {post.read_time} {t('minRead')}
               </span>
             )}
             <span>{formatDate(post.created_at)}</span>
@@ -85,7 +86,7 @@ function FeaturedInsightCard({ post }: { post: Post }) {
 }
 
 // Regular Insight Card
-function InsightCard({ post }: { post: Post }) {
+function InsightCard({ post, t }: { post: Post; t: (key: string) => string }) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -106,7 +107,7 @@ function InsightCard({ post }: { post: Post }) {
               <span>•</span>
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" />
-                {post.read_time} min
+                {post.read_time} {t('min')}
               </span>
             </>
           )}
@@ -128,7 +129,7 @@ function InsightCard({ post }: { post: Post }) {
             </span>
           )}
           <span className="flex items-center gap-2 text-xs text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">
-            Read Article
+            {t('readArticle')}
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </span>
         </div>
@@ -138,6 +139,7 @@ function InsightCard({ post }: { post: Post }) {
 }
 
 export default async function InsightsPage() {
+  const t = await getTranslations('insights')
   const insights = await getInsights()
   const featured = insights[0]
   const rest = insights.slice(1)
@@ -150,13 +152,13 @@ export default async function InsightsPage() {
       <section className="pt-32 pb-16 px-6 border-b border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="inline-block px-3 py-1 border border-white/20 text-xs font-mono uppercase tracking-widest mb-6 text-gray-400">
-            Research & Analysis
+            {t('label')}
           </div>
           <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6">
-            Insights
+            {t('title')}
           </h1>
           <p className="text-gray-400 text-xl max-w-2xl leading-relaxed">
-            Deep dives into DeFi infrastructure, risk management, and the evolving landscape of institutional digital assets.
+            {t('description')}
           </p>
         </div>
       </section>
@@ -169,7 +171,7 @@ export default async function InsightsPage() {
               {/* Featured Article */}
               {featured && (
                 <div className="mb-16">
-                  <FeaturedInsightCard post={featured} />
+                  <FeaturedInsightCard post={featured} t={t} />
                 </div>
               )}
 
@@ -177,11 +179,11 @@ export default async function InsightsPage() {
               {rest.length > 0 && (
                 <div className="space-y-8">
                   <h2 className="text-sm font-mono uppercase tracking-widest text-gray-500 pb-4 border-b border-white/10">
-                    All Insights
+                    {t('allInsights')}
                   </h2>
                   <div className="space-y-8">
                     {rest.map((post) => (
-                      <InsightCard key={post.id} post={post} />
+                      <InsightCard key={post.id} post={post} t={t} />
                     ))}
                   </div>
                 </div>
@@ -189,8 +191,8 @@ export default async function InsightsPage() {
             </>
           ) : (
             <div className="text-center py-24 border border-white/10">
-              <p className="text-gray-400 text-xl font-serif">No insights yet</p>
-              <p className="text-gray-600 mt-2 font-mono text-sm">Check back soon for in-depth analysis</p>
+              <p className="text-gray-400 text-xl font-serif">{t('noInsights')}</p>
+              <p className="text-gray-600 mt-2 font-mono text-sm">{t('checkBack')}</p>
             </div>
           )}
         </div>

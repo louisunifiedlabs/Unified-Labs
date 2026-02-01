@@ -1,24 +1,27 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import { Target, Eye, Sparkles, Shield, Handshake } from 'lucide-react'
 
 export default function AboutPage() {
+  const t = useTranslations('about')
+
   const values = [
     {
-      title: 'Rigor',
-      description: 'We approach DeFi with institutional discipline. Every risk is measured, every opportunity is evaluated.',
+      title: t('rigorTitle'),
+      description: t('rigorDesc'),
       icon: Shield
     },
     {
-      title: 'Trust',
-      description: 'We build for the long term. Sustainable partnerships over short-term gains, always.',
+      title: t('trustTitle'),
+      description: t('trustDesc'),
       icon: Handshake
     },
     {
-      title: 'Expertise',
-      description: 'We bridge two worlds. Deep knowledge in both traditional finance and decentralized protocols.',
+      title: t('expertiseTitle'),
+      description: t('expertiseDesc'),
       icon: Sparkles
     }
   ]
@@ -33,23 +36,23 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
               <h1 className="text-5xl md:text-7xl font-serif font-bold">
-                About us
+                {t('title')}
               </h1>
             </div>
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <Target className="w-5 h-5 text-cyan-400" />
-                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">Our Purpose</span>
+                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{t('purposeLabel')}</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-white leading-tight mb-6">
-                Our purpose is building the infrastructure for institutional DeFi adoption.
+                {t('purpose')}
               </h2>
               <div className="flex items-center gap-3 mb-6 mt-12">
                 <Eye className="w-5 h-5 text-cyan-400" />
-                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">Our Vision</span>
+                <span className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{t('visionLabel')}</span>
               </div>
               <p className="text-lg text-gray-400 leading-relaxed">
-                We have a vision to bridge traditional finance and decentralized protocols, empowering institutions with the risk management and liquidity tools they need to participate in the future of finance.
+                {t('vision')}
               </p>
             </div>
           </div>
@@ -62,7 +65,7 @@ export default function AboutPage() {
           <div className="mb-16">
             <div className="w-12 h-1 bg-cyan-400 mb-6"></div>
             <h2 className="text-xs font-mono text-white uppercase tracking-[0.2em]">
-              Our Values
+              {t('valuesLabel')}
             </h2>
           </div>
 
@@ -93,16 +96,16 @@ export default function AboutPage() {
       <section className="py-24 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
-            Ready to optimize your onchain allocation?
+            {t('ctaTitle')}
           </h2>
           <p className="text-gray-400 text-lg mb-10">
-            Get in touch with our team to learn how Unified Labs can help you navigate onchain finance.
+            {t('ctaDesc')}
           </p>
           <a
             href="/contact"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-gray-200 transition-colors"
           >
-            Contact Us
+            {t('ctaButton')}
           </a>
         </div>
       </section>

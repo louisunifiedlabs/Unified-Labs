@@ -4,6 +4,7 @@ import { supabase, Post } from '@/lib/supabase'
 import { Calendar, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60
 
@@ -90,6 +91,7 @@ function NewsItem({ post, featured = false }: { post: Post; featured?: boolean }
 }
 
 export default async function NewsPage() {
+  const t = await getTranslations('news')
   const news = await getNews()
   const featured = news.slice(0, 3)
   const rest = news.slice(3)
@@ -103,10 +105,10 @@ export default async function NewsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">Latest Updates</span>
+            <span className="text-xs font-mono text-gray-400 uppercase tracking-widest">{t('latestUpdates')}</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-serif font-bold">
-            News
+            {t('title')}
           </h1>
         </div>
       </section>
@@ -119,7 +121,7 @@ export default async function NewsPage() {
               {/* Featured News (Left Column) */}
               <div className="lg:col-span-2">
                 <h2 className="text-xs font-mono uppercase tracking-widest text-gray-500 pb-3 mb-6 border-b border-white/10">
-                  Featured
+                  {t('featured')}
                 </h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   {featured.map((post) => (
@@ -131,7 +133,7 @@ export default async function NewsPage() {
               {/* Recent News (Right Column) */}
               <div>
                 <h2 className="text-xs font-mono uppercase tracking-widest text-gray-500 pb-3 mb-6 border-b border-white/10">
-                  Recent
+                  {t('recent')}
                 </h2>
                 <div className="space-y-0">
                   {rest.length > 0 ? (
@@ -148,8 +150,8 @@ export default async function NewsPage() {
             </div>
           ) : (
             <div className="text-center py-24 border border-white/10">
-              <p className="text-gray-400 text-lg font-serif">No news yet</p>
-              <p className="text-gray-600 mt-2 font-mono text-sm">Check back soon for updates</p>
+              <p className="text-gray-400 text-lg font-serif">{t('noNews')}</p>
+              <p className="text-gray-600 mt-2 font-mono text-sm">{t('checkBack')}</p>
             </div>
           )}
         </div>

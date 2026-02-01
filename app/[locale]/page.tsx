@@ -1,7 +1,8 @@
 'use client'
 
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { ArrowRight, ChevronDown } from 'lucide-react'
+import { Link } from '@/i18n/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FluidGridBackground from '@/components/FluidGridBackground'
@@ -9,6 +10,8 @@ import NewsPreview from '@/components/NewsPreview'
 
 
 export default function HomePage() {
+  const t = useTranslations('home')
+
   return (
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
       <FluidGridBackground />
@@ -19,20 +22,20 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto w-full pt-20">
           <div className="inline-flex items-center gap-3 mb-10 border border-white/10 rounded-full px-4 py-1.5 bg-black/40 backdrop-blur-md">
             <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-[0.2em]">System Status: Active</span>
+            <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-[0.2em]">{t('status')}</span>
           </div>
 
           <div className="mb-12">
             {/* LAYER 1: The Context */}
             <div className="text-sm md:text-lg font-mono text-cyan-400 uppercase tracking-[0.6em] mb-4 md:mb-6 pl-1 opacity-80">
-              The layer where
+              {t('context')}
             </div>
 
             {/* LAYER 2: The Duality - TradFi & DeFi */}
             <div className="flex flex-col md:flex-row items-start md:items-baseline gap-4 md:gap-8 mb-4 md:mb-6">
               {/* TradFi: Solid, Heavy, Serif */}
               <span className="text-6xl md:text-8xl font-serif font-black text-white tracking-tighter drop-shadow-2xl">
-                TradFi
+                {t('tradfi')}
               </span>
 
               {/* Connector */}
@@ -48,7 +51,7 @@ export default function HomePage() {
                   textShadow: '0 0 25px rgba(34, 211, 238, 0.35)'
                 }}
               >
-                DeFi
+                {t('defi')}
               </span>
             </div>
 
@@ -56,14 +59,14 @@ export default function HomePage() {
             <div className="relative inline-block">
               <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full transform scale-x-110"></div>
               <span className="relative text-5xl md:text-7xl font-serif italic font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-100 via-cyan-100 to-white tracking-wide mix-blend-overlay opacity-90">
-                become one.
+                {t('fusion')}
               </span>
             </div>
           </div>
 
           <div className="border-l border-white/20 pl-8 ml-2 mt-12">
             <p className="max-w-xl text-lg md:text-xl text-gray-400 leading-relaxed font-light">
-              Unified Labs delivers institutional risk strategies and liquidity infrastructure—optimal onchain allocation for every dollar deployed.
+              {t('description')}
             </p>
           </div>
         </div>
@@ -81,17 +84,17 @@ export default function HomePage() {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
-                <span className="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">Latest Updates</span>
+                <span className="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">{t('latestUpdates')}</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-serif font-bold">
-                News
+                {t('news')}
               </h2>
             </div>
             <Link
               href="/news"
               className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mt-6 md:mt-0"
             >
-              View All
+              {t('viewAll')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

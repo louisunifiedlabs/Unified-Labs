@@ -1,7 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
 import { supabase, Post } from '@/lib/supabase'
@@ -72,6 +73,7 @@ function NewsCard({ post, featured = false }: { post: Post; featured?: boolean }
 }
 
 export default function NewsPreview() {
+  const t = useTranslations('news')
   const [news, setNews] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -114,8 +116,8 @@ export default function NewsPreview() {
   if (news.length === 0) {
     return (
       <div className="text-center py-20 border border-white/10">
-        <p className="text-gray-400 text-lg font-serif">No news yet</p>
-        <p className="text-gray-600 mt-2 font-mono text-sm">Check back soon for updates</p>
+        <p className="text-gray-400 text-lg font-serif">{t('noNews')}</p>
+        <p className="text-gray-600 mt-2 font-mono text-sm">{t('checkBack')}</p>
       </div>
     )
   }
@@ -137,7 +139,7 @@ export default function NewsPreview() {
       {/* Recent List */}
       <div>
         <h3 className="text-xs font-mono uppercase tracking-widest text-gray-500 pb-3 mb-2 border-b border-white/10">
-          Recent
+          {t('recent')}
         </h3>
         <div>
           {recent.length > 0 ? (
