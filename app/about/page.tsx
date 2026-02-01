@@ -7,19 +7,19 @@ import { Target, Eye, Sparkles, Shield, Handshake } from 'lucide-react'
 export default function AboutPage() {
   const values = [
     {
-      title: 'Accessibility',
-      description: 'We make complex DeFi strategies simple. Institutional-grade tools shouldn\'t require institutional resources.',
-      icon: Sparkles
+      title: 'Rigor',
+      description: 'We approach DeFi with institutional discipline. Every risk is measured, every opportunity is evaluated.',
+      icon: Shield
     },
     {
       title: 'Trust',
-      description: 'We build for the long term. Sustainable relationships over short-term gains, always.',
+      description: 'We build for the long term. Sustainable partnerships over short-term gains, always.',
       icon: Handshake
     },
     {
-      title: 'Excellence',
-      description: 'We pursue optimal allocation, never settling. Every strategy we deploy meets the highest standards.',
-      icon: Shield
+      title: 'Expertise',
+      description: 'We bridge two worlds. Deep knowledge in both traditional finance and decentralized protocols.',
+      icon: Sparkles
     }
   ]
 

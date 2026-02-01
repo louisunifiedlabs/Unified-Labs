@@ -1,27 +1,34 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import { supabase } from '@/lib/supabase'
+import { getPostBySlug, urlFor, SanityPost } from '@/lib/sanity'
 import { Calendar, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { PortableText } from '@portabletext/react'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
-async function getNewsBySlug(slug: string) {
-  const { data, error } = await supabase
-    .from('posts')
-    .select('*')
-    .eq('slug', slug)
-    .eq('post_type', 'news')
-    .eq('is_published', true)
-    .single()
-
-  if (error || !data) {
-    return null
-  }
-
-  return data
+const portableTextComponents = {
+  types: {
+    image: ({ value }: any) => {
+      if (!value?.asset?._ref) return null
+      return (
+        <div className="my-8">
+          <Image
+            src={urlFor(value).width(1200).url()}
+            alt={value.caption || ''}
+            width={1200}
+            height={675}
+            className="w-full rounded"
+          />
+          {value.caption && (
+            <p className="text-center text-sm text-gray-500 mt-3">{value.caption}</p>
+          )}
+        </div>
+      )
+    },
+  },
 }
 
 export default async function NewsDetailPage({
@@ -29,9 +36,9 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string }
 }) {
-  const news = await getNewsBySlug(params.slug)
+  const post: SanityPost | null = await getPostBySlug(params.slug)
 
-  if (!news) {
+  if (!post) {
     notFound()
   }
 
@@ -61,32 +68,36 @@ export default async function NewsDetailPage({
           {/* Header */}
           <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-4 text-xs text-gray-500 mb-6 font-mono uppercase tracking-wider">
-              <span className="flex items-center gap-2">
-                <Calendar className="w-3 h-3" />
-                {formatDate(news.created_at)}
-              </span>
-              <span className="px-2 py-0.5 border border-white/20 rounded">
-                {news.category}
-              </span>
+              {post.publishedAt && (
+                <span className="flex items-center gap-2">
+                  <Calendar className="w-3 h-3" />
+                  {formatDate(post.publishedAt)}
+                </span>
+              )}
+              {post.category && (
+                <span className="px-2 py-0.5 border border-white/20 rounded">
+                  {post.category}
+                </span>
+              )}
             </div>
 
             <h1 className="text-3xl md:text-4xl font-serif font-bold leading-tight">
-              {news.title}
+              {post.title}
             </h1>
 
-            {news.summary && (
+            {post.summary && (
               <p className="text-lg text-gray-400 mt-6 leading-relaxed">
-                {news.summary}
+                {post.summary}
               </p>
             )}
           </header>
 
           {/* Cover Image */}
-          {news.cover_image && (
+          {post.coverImage && (
             <div className="relative h-64 md:h-96 overflow-hidden mb-12 border border-white/10">
               <Image
-                src={news.cover_image}
-                alt={news.title}
+                src={urlFor(post.coverImage).width(1200).height(675).url()}
+                alt={post.title}
                 fill
                 className="object-cover"
                 priority
@@ -95,10 +106,11 @@ export default async function NewsDetailPage({
           )}
 
           {/* Content */}
-          <div
-            className="prose prose-lg prose-invert max-w-none"
-            dangerouslySetInnerHTML={{ __html: news.content }}
-          />
+          {post.content && (
+            <div className="prose prose-lg prose-invert max-w-none">
+              <PortableText value={post.content} components={portableTextComponents} />
+            </div>
+          )}
 
           {/* Footer Navigation */}
           <div className="mt-16 pt-8 border-t border-white/10">
