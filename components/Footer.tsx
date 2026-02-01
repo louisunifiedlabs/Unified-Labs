@@ -26,7 +26,7 @@ export default function Footer() {
                 <li><a href="https://x.com/unifiedlabs_" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter / X</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
                 <li><Link href="/news" className="hover:text-white transition-colors">News</Link></li>
-                <li><Link href="/insights" className="hover:text-white transition-colors">Insights</Link></li>
+                <li><a href="https://unifiedlabs.substack.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Insights</a></li>
               </ul>
             </div>
           </div>

@@ -17,7 +17,7 @@ export default function Nav() {
 
   const navItems = [
     { name: 'News', href: '/news' },
-    { name: 'Insights', href: '/insights' },
+    { name: 'Insights', href: 'https://unifiedlabs.substack.com/', external: true },
     { name: 'About', href: '/about' },
     { name: 'Docs', href: '/docs', external: true },
   ]
