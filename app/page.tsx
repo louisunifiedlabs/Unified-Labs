@@ -1,14 +1,15 @@
-'use client'
-
 import Link from 'next/link'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FluidGridBackground from '@/components/FluidGridBackground'
 import NewsPreview from '@/components/NewsPreview'
+import { getRecentPosts, SanityPost } from '@/lib/sanity'
 
+export const dynamic = 'force-dynamic'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts: SanityPost[] = await getRecentPosts(6)
   return (
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
       <FluidGridBackground />
@@ -96,7 +97,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <NewsPreview />
+          <NewsPreview posts={posts} />
         </div>
       </section>
 
