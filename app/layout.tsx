@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Unified Labs | Liquidity Engineered',
+  title: 'Unified Labs',
   description: 'Unified Labs bridges Traditional Finance and DeFi. We curate risk, make markets, and engineer the future of yield.',
 }
 
