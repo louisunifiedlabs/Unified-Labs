@@ -39,7 +39,7 @@ export default function AdminLayout({
     checkUser()
 
     // 监听认证状态变化
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: any, session: any) => {
       if (event === 'SIGNED_OUT') {
         router.push('/admin/login')
       }

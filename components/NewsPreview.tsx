@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
-import { supabase, Post } from '@/lib/supabase'
+import { client, urlFor, SanityPost } from '@/lib/sanity'
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -14,32 +14,36 @@ function formatDate(dateString: string) {
   })
 }
 
-function NewsCard({ post, featured = false }: { post: Post; featured?: boolean }) {
+function NewsCard({ post, featured = false }: { post: SanityPost; featured?: boolean }) {
   if (featured) {
     return (
-      <Link href={`/news/${post.slug}`} className="group block">
+      <Link href={`/news/${post.slug.current}`} className="group block">
         <article className="border border-white/10 hover:border-white/30 transition-all duration-300 overflow-hidden h-full">
-          {post.cover_image && (
+          {post.coverImage && (
             <div className="relative h-48 overflow-hidden">
               <Image
-                src={post.cover_image}
+                src={urlFor(post.coverImage).width(800).height(500).url()}
                 alt={post.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
               <div className="absolute bottom-4 left-4">
-                <span className="inline-block px-2 py-0.5 bg-white text-black text-[10px] font-mono uppercase tracking-wider">
-                  {post.category}
-                </span>
+                {post.category && (
+                  <span className="inline-block px-2 py-0.5 bg-white text-black text-[10px] font-mono uppercase tracking-wider">
+                    {post.category}
+                  </span>
+                )}
               </div>
             </div>
           )}
           <div className="p-5">
-            <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 font-mono">
-              <Calendar className="w-3 h-3" />
-              {formatDate(post.created_at)}
-            </div>
+            {post.publishedAt && (
+              <div className="flex items-center gap-2 text-xs text-gray-500 mb-3 font-mono">
+                <Calendar className="w-3 h-3" />
+                {formatDate(post.publishedAt)}
+              </div>
+            )}
             <h3 className="text-lg font-serif font-bold text-white mb-2 group-hover:text-gray-300 transition-colors line-clamp-2">
               {post.title}
             </h3>
@@ -53,13 +57,13 @@ function NewsCard({ post, featured = false }: { post: Post; featured?: boolean }
   }
 
   return (
-    <Link href={`/news/${post.slug}`} className="group block">
+    <Link href={`/news/${post.slug.current}`} className="group block">
       <article className="flex gap-4 py-5 border-b border-white/5 hover:border-white/20 transition-colors">
         <div className="flex-1">
           <div className="flex items-center gap-3 text-[10px] text-gray-500 mb-2 font-mono uppercase tracking-wider">
-            <span className="text-cyan-400">{post.category}</span>
-            <span>•</span>
-            <span>{formatDate(post.created_at)}</span>
+            {post.category && <span className="text-cyan-400">{post.category}</span>}
+            {post.category && post.publishedAt && <span>•</span>}
+            {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
           </div>
           <h3 className="text-base font-medium text-white group-hover:text-gray-300 transition-colors line-clamp-2">
             {post.title}
@@ -72,21 +76,26 @@ function NewsCard({ post, featured = false }: { post: Post; featured?: boolean }
 }
 
 export default function NewsPreview() {
-  const [news, setNews] = useState<Post[]>([])
+  const [news, setNews] = useState<SanityPost[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchNews() {
-      const { data, error } = await supabase
-        .from('posts')
-        .select('*')
-        .eq('post_type', 'news')
-        .eq('is_published', true)
-        .order('created_at', { ascending: false })
-        .limit(6)
-
-      if (!error && data) {
-        setNews(data)
+      try {
+        const data = await client.fetch(
+          `*[_type == "post"] | order(publishedAt desc) [0...6] {
+            _id,
+            title,
+            slug,
+            summary,
+            coverImage,
+            category,
+            publishedAt,
+          }`
+        )
+        setNews(data || [])
+      } catch (err) {
+        console.error('Error fetching news:', err)
       }
       setLoading(false)
     }
@@ -125,16 +134,14 @@ export default function NewsPreview() {
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
-      {/* Featured News Cards */}
       <div className="lg:col-span-2">
         <div className="grid md:grid-cols-2 gap-4">
           {featured.map((post) => (
-            <NewsCard key={post.id} post={post} featured />
+            <NewsCard key={post._id} post={post} featured />
           ))}
         </div>
       </div>
 
-      {/* Recent List */}
       <div>
         <h3 className="text-xs font-mono uppercase tracking-widest text-gray-500 pb-3 mb-2 border-b border-white/10">
           Recent
@@ -142,11 +149,11 @@ export default function NewsPreview() {
         <div>
           {recent.length > 0 ? (
             recent.map((post) => (
-              <NewsCard key={post.id} post={post} />
+              <NewsCard key={post._id} post={post} />
             ))
           ) : (
             featured.map((post) => (
-              <NewsCard key={post.id} post={post} />
+              <NewsCard key={post._id} post={post} />
             ))
           )}
         </div>
