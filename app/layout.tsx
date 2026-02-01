@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
+    <html lang="en">
       <body className="bg-black min-h-screen text-white selection:bg-white selection:text-black">
         {children}
       </body>

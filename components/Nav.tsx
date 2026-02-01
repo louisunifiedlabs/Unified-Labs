@@ -1,16 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useTranslations, useLocale } from 'next-intl'
-import { Link, usePathname, useRouter } from '@/i18n/navigation'
+import Link from 'next/link'
 import { X, Menu } from 'lucide-react'
 import Logo from './Logo'
 
 export default function Nav() {
-  const t = useTranslations('nav')
-  const locale = useLocale()
-  const pathname = usePathname()
-  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -21,16 +16,11 @@ export default function Nav() {
   }, [])
 
   const navItems = [
-    { name: t('news'), href: '/news' as const },
-    { name: t('insights'), href: '/insights' as const },
-    { name: t('about'), href: '/about' as const },
-    { name: t('docs'), href: '/docs', external: true },
+    { name: 'News', href: '/news' },
+    { name: 'Insights', href: '/insights' },
+    { name: 'About', href: '/about' },
+    { name: 'Docs', href: '/docs', external: true },
   ]
-
-  const switchLocale = () => {
-    const nextLocale = locale === 'en' ? 'zh' : 'en'
-    router.replace(pathname, { locale: nextLocale })
-  }
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-lg border-b border-white/10' : 'bg-transparent py-6'}`}>
@@ -62,17 +52,11 @@ export default function Nav() {
                 </Link>
               )
             )}
-            <button
-              onClick={switchLocale}
-              className="text-xs font-mono text-gray-400 hover:text-white transition-colors tracking-wider border border-white/20 px-3 py-1.5 hover:border-white/40"
-            >
-              {locale === 'en' ? '中文' : 'EN'}
-            </button>
             <Link
               href="/contact"
               className="px-6 py-2 bg-white text-black font-serif font-bold text-sm hover:bg-gray-200 transition-colors tracking-wide"
             >
-              {t('contact')}
+              CONTACT US
             </Link>
           </div>
 
@@ -109,18 +93,12 @@ export default function Nav() {
                 </Link>
               )
             )}
-            <button
-              onClick={() => { switchLocale(); setIsOpen(false) }}
-              className="text-left text-lg text-gray-300 font-serif"
-            >
-              {locale === 'en' ? '中文' : 'English'}
-            </button>
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
               className="inline-block px-6 py-3 bg-white text-black font-serif font-bold text-sm text-center mt-4"
             >
-              {t('contact')}
+              CONTACT US
             </Link>
           </div>
         </div>

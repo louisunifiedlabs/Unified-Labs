@@ -5,7 +5,6 @@ import { Clock, User, ArrowLeft, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60
 
@@ -30,7 +29,6 @@ export default async function InsightDetailPage({
 }: {
   params: { slug: string }
 }) {
-  const t = await getTranslations('insights')
   const insight = await getInsightBySlug(params.slug)
 
   if (!insight) {
@@ -57,7 +55,7 @@ export default async function InsightDetailPage({
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm uppercase tracking-widest font-mono"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t('backToInsights')}
+            Back to Insights
           </Link>
 
           <div className="flex items-center gap-4 text-xs text-gray-500 mb-6 font-mono uppercase tracking-wider">
@@ -71,7 +69,7 @@ export default async function InsightDetailPage({
             {insight.read_time && (
               <span className="flex items-center gap-2">
                 <Clock className="w-3 h-3" />
-                {insight.read_time} {t('minRead')}
+                {insight.read_time} min read
               </span>
             )}
           </div>
@@ -127,7 +125,7 @@ export default async function InsightDetailPage({
                 className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm uppercase tracking-widest font-mono"
               >
                 <ArrowLeft className="w-4 h-4" />
-                {t('allInsights')}
+                All Insights
               </Link>
             </div>
           </div>

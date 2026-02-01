@@ -5,7 +5,6 @@ import { Calendar, ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 60
 
@@ -30,7 +29,6 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string }
 }) {
-  const t = await getTranslations('news')
   const news = await getNewsBySlug(params.slug)
 
   if (!news) {
@@ -57,7 +55,7 @@ export default async function NewsDetailPage({
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 text-sm uppercase tracking-widest font-mono"
           >
             <ArrowLeft className="w-4 h-4" />
-            {t('backToNews')}
+            Back to News
           </Link>
 
           {/* Header */}
@@ -109,7 +107,7 @@ export default async function NewsDetailPage({
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm uppercase tracking-widest font-mono"
             >
               <ArrowLeft className="w-4 h-4" />
-              {t('backToAllNews')}
+              Back to all news
             </Link>
           </div>
         </div>
