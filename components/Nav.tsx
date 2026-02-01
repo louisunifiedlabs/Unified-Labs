@@ -19,6 +19,7 @@ export default function Nav() {
     { name: 'News', href: '/news' },
     { name: 'Insights', href: '/insights' },
     { name: 'About', href: '/about' },
+    { name: 'Docs', href: '/docs', external: true },
   ]
 
   return (
@@ -30,15 +31,27 @@ export default function Nav() {
           </Link>
 
           <div className="hidden md:flex space-x-12 items-center">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-xs md:text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-[0.15em] uppercase"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs md:text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-[0.15em] uppercase"
+                >
+                  {item.name} <span className="text-[0.6em]">&#8599;</span>
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-xs md:text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-[0.15em] uppercase"
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
             <Link
               href="/contact"
               className="px-6 py-2 bg-white text-black font-serif font-bold text-sm hover:bg-gray-200 transition-colors tracking-wide"
@@ -57,16 +70,29 @@ export default function Nav() {
       {isOpen && (
         <div className="md:hidden absolute w-full bg-black border-b border-white/10">
           <div className="flex flex-col p-6 space-y-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                className="text-lg text-gray-300 font-serif"
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg text-gray-300 font-serif"
+                >
+                  {item.name} <span className="text-[0.7em]">&#8599;</span>
+                </a>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className="text-lg text-gray-300 font-serif"
+                >
+                  {item.name}
+                </Link>
+              )
+            )}
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
