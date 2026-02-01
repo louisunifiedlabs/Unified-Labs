@@ -36,7 +36,8 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string }
 }) {
-  const post: SanityPost | null = await getPostBySlug(params.slug)
+  const decodedSlug = decodeURIComponent(params.slug)
+  const post: SanityPost | null = await getPostBySlug(decodedSlug)
 
   if (!post) {
     notFound()
