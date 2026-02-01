@@ -94,10 +94,10 @@ export default async function NewsDetailPage({
           </header>
 
           {/* Cover Image */}
-          {post.coverImage && (
+          {post.image && (
             <div className="relative h-64 md:h-96 overflow-hidden mb-12 border border-white/10">
               <Image
-                src={urlFor(post.coverImage).width(1200).height(675).url()}
+                src={urlFor(post.image).width(1200).height(675).url()}
                 alt={post.title}
                 fill
                 className="object-cover"

@@ -25,8 +25,8 @@ export default defineType({
       rows: 3,
     }),
     defineField({
-      name: 'coverImage',
-      title: 'Cover Image',
+      name: 'image',
+      title: 'Image',
       type: 'image',
       options: { hotspot: true },
     }),
@@ -80,7 +80,7 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      media: 'coverImage',
+      media: 'image',
       date: 'publishedAt',
     },
     prepare({ title, media, date }) {

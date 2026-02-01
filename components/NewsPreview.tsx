@@ -16,10 +16,10 @@ function NewsCard({ post, featured = false }: { post: SanityPost; featured?: boo
     return (
       <Link href={`/news/${post.slug.current}`} className="group block">
         <article className="border border-white/10 hover:border-white/30 transition-all duration-300 overflow-hidden h-full">
-          {post.coverImage && (
+          {post.image && (
             <div className="relative h-48 overflow-hidden">
               <Image
-                src={urlFor(post.coverImage).width(800).height(500).url()}
+                src={urlFor(post.image).width(800).height(500).url()}
                 alt={post.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"

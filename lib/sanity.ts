@@ -22,7 +22,7 @@ export async function getPosts() {
       title,
       slug,
       summary,
-      coverImage,
+      image,
       category,
       publishedAt,
     }`
@@ -36,7 +36,7 @@ export async function getPostBySlug(slug: string) {
       title,
       slug,
       summary,
-      coverImage,
+      image,
       content,
       category,
       publishedAt,
@@ -52,7 +52,7 @@ export async function getRecentPosts(limit: number = 6) {
       title,
       slug,
       summary,
-      coverImage,
+      image,
       category,
       publishedAt,
     }`,
@@ -66,7 +66,7 @@ export interface SanityPost {
   title: string
   slug: { current: string }
   summary?: string
-  coverImage?: any
+  image?: any
   content?: any[]
   category?: string
   publishedAt?: string
