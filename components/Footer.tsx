@@ -24,7 +24,6 @@ export default function Footer() {
               <h4 className="font-serif font-bold text-lg mb-8">Connect</h4>
               <ul className="space-y-5 text-gray-500 text-sm font-medium tracking-wide">
                 <li><a href="https://x.com/unifiedlabs_" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Twitter / X</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
                 <li><Link href="/news" className="hover:text-white transition-colors">News</Link></li>
                 <li><a href="https://unifiedlabs.substack.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Insights</a></li>
               </ul>
@@ -34,7 +33,6 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/10 text-[10px] md:text-xs text-gray-600 font-mono uppercase tracking-[0.1em]">
           <div>&copy; 2025 Unified Labs. All rights reserved.</div>
-          <div className="mt-4 md:mt-0">Hong Kong • Singapore • Dubai</div>
         </div>
       </div>
     </footer>
