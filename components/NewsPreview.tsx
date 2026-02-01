@@ -1,10 +1,7 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, ArrowRight } from 'lucide-react'
-import { client, urlFor, SanityPost } from '@/lib/sanity'
+import { urlFor, SanityPost } from '@/lib/sanity'
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -19,10 +16,10 @@ function NewsCard({ post, featured = false }: { post: SanityPost; featured?: boo
     return (
       <Link href={`/news/${post.slug.current}`} className="group block">
         <article className="border border-white/10 hover:border-white/30 transition-all duration-300 overflow-hidden h-full">
-          {post.coverImage && (
+          {post.image && (
             <div className="relative h-48 overflow-hidden">
               <Image
-                src={urlFor(post.coverImage).width(800).height(500).url()}
+                src={urlFor(post.image).width(800).height(500).url()}
                 alt={post.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -75,52 +72,8 @@ function NewsCard({ post, featured = false }: { post: SanityPost; featured?: boo
   )
 }
 
-export default function NewsPreview() {
-  const [news, setNews] = useState<SanityPost[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function fetchNews() {
-      try {
-        const data = await client.fetch(
-          `*[_type == "post"] | order(publishedAt desc) [0...6] {
-            _id,
-            title,
-            slug,
-            summary,
-            coverImage,
-            category,
-            publishedAt,
-          }`
-        )
-        setNews(data || [])
-      } catch (err) {
-        console.error('Error fetching news:', err)
-      }
-      setLoading(false)
-    }
-
-    fetchNews()
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="grid md:grid-cols-3 gap-6">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="border border-white/10 animate-pulse">
-            <div className="h-48 bg-white/5"></div>
-            <div className="p-5 space-y-3">
-              <div className="h-3 bg-white/5 rounded w-1/3"></div>
-              <div className="h-5 bg-white/5 rounded"></div>
-              <div className="h-4 bg-white/5 rounded w-2/3"></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  if (news.length === 0) {
+export default function NewsPreview({ posts }: { posts: SanityPost[] }) {
+  if (posts.length === 0) {
     return (
       <div className="text-center py-20 border border-white/10">
         <p className="text-gray-400 text-lg font-serif">No news yet</p>
@@ -129,8 +82,8 @@ export default function NewsPreview() {
     )
   }
 
-  const featured = news.slice(0, 3)
-  const recent = news.slice(3, 6)
+  const featured = posts.slice(0, 3)
+  const recent = posts.slice(3, 6)
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
