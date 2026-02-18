@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Unified Labs',
-  description: 'Unified Labs bridges Traditional Finance and DeFi. We curate risk, make markets, and engineer the future of yield.',
+  description: 'Unified Labs delivers institutional risk strategies and liquidity infrastructure—optimal onchain allocation for every dollar deployed.',
 }
 
 export default function RootLayout({
