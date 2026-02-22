@@ -17,7 +17,6 @@ export default function Nav() {
 
   const navItems = [
     { name: 'Insights', href: '/insights' },
-    { name: 'News', href: '/news' },
     { name: 'About', href: '/about' },
     { name: 'Docs', href: '/docs', external: true },
   ]
