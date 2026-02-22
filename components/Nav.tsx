@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { X, Menu } from 'lucide-react'
+import { X, Menu, Globe } from 'lucide-react'
 import Logo from './Logo'
+import { useLanguage, Locale } from '@/lib/language'
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const { locale, setLocale, t } = useLanguage()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -15,10 +17,14 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const toggleLocale = () => {
+    setLocale(locale === 'en' ? 'zh' : 'en')
+  }
+
   const navItems = [
-    { name: 'Insights', href: '/insights' },
-    { name: 'About', href: '/about' },
-    { name: 'Docs', href: '/docs', external: true },
+    { name: t('nav.insights'), href: '/insights' },
+    { name: t('nav.about'), href: '/about' },
+    { name: t('nav.docs'), href: '/docs', external: true },
   ]
 
   return (
@@ -33,7 +39,7 @@ export default function Nav() {
             {navItems.map((item) =>
               item.external ? (
                 <a
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -43,7 +49,7 @@ export default function Nav() {
                 </a>
               ) : (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   className="text-xs md:text-sm font-medium text-gray-400 hover:text-white transition-colors tracking-[0.15em] uppercase"
                 >
@@ -51,11 +57,21 @@ export default function Nav() {
                 </Link>
               )
             )}
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-1.5 text-xs font-mono text-gray-400 hover:text-white transition-colors tracking-wider uppercase border border-white/10 px-3 py-1.5 hover:border-white/30"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {locale === 'en' ? 'ZH' : 'EN'}
+            </button>
+
             <Link
               href="/contact"
               className="px-6 py-2 bg-white text-black font-serif font-bold text-sm hover:bg-gray-200 transition-colors tracking-wide"
             >
-              CONTACT US
+              {t('nav.contact').toUpperCase()}
             </Link>
           </div>
 
@@ -72,7 +88,7 @@ export default function Nav() {
             {navItems.map((item) =>
               item.external ? (
                 <a
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -83,7 +99,7 @@ export default function Nav() {
                 </a>
               ) : (
                 <Link
-                  key={item.name}
+                  key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className="text-lg text-gray-300 font-serif"
@@ -92,12 +108,22 @@ export default function Nav() {
                 </Link>
               )
             )}
+
+            {/* Mobile Language Toggle */}
+            <button
+              onClick={toggleLocale}
+              className="flex items-center gap-2 text-lg text-gray-300 font-serif"
+            >
+              <Globe className="w-4 h-4" />
+              {locale === 'en' ? '切换中文' : 'Switch to English'}
+            </button>
+
             <Link
               href="/contact"
               onClick={() => setIsOpen(false)}
               className="inline-block px-6 py-3 bg-white text-black font-serif font-bold text-sm text-center mt-4"
             >
-              CONTACT US
+              {t('nav.contact').toUpperCase()}
             </Link>
           </div>
         </div>

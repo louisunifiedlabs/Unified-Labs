@@ -5,28 +5,37 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock } from 'lucide-react'
 import { GhostPost, INSIGHT_TABS, TabKey } from '@/lib/ghost'
+import { useLanguage } from '@/lib/language'
 
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
+function formatDate(dateString: string, locale: string) {
+  return new Date(dateString).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   })
 }
 
-function getTagLabel(post: GhostPost): string | null {
+function getCategoryTag(post: GhostPost): GhostPost['tags'][number] | null {
   if (!post.tags || post.tags.length === 0) return null
-  return post.tags[0].name
+  // Return the first tag that is NOT a language tag (en/zh)
+  return post.tags.find((t) => t.slug !== 'en' && t.slug !== 'zh') ?? null
+}
+
+function getTagLabel(post: GhostPost): string | null {
+  const tag = getCategoryTag(post)
+  return tag?.name ?? null
 }
 
 function getTagSlug(post: GhostPost): string | null {
-  if (!post.tags || post.tags.length === 0) return null
-  return post.tags[0].slug
+  const tag = getCategoryTag(post)
+  return tag?.slug ?? null
 }
 
 // ── Unified card for all posts ─────────────────────────
 
 function PostCard({ post }: { post: GhostPost }) {
+  const { locale, t } = useLanguage()
+
   return (
     <Link href={`/insights/${post.slug}`} className="group block">
       <article className="border border-white/10 hover:border-white/20 transition-all duration-300 overflow-hidden h-full">
@@ -63,14 +72,14 @@ function PostCard({ post }: { post: GhostPost }) {
           <div className="flex items-center gap-3 text-xs text-gray-500 mb-2 font-mono">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3 h-3" />
-              {formatDate(post.published_at)}
+              {formatDate(post.published_at, locale)}
             </span>
             {post.reading_time > 0 && (
               <>
                 <span>·</span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3 h-3" />
-                  {post.reading_time} min read
+                  {post.reading_time} {t('reading.min')}
                 </span>
               </>
             )}
@@ -93,11 +102,17 @@ function PostCard({ post }: { post: GhostPost }) {
 
 export default function InsightsTabs({ posts }: { posts: GhostPost[] }) {
   const [activeTab, setActiveTab] = useState<TabKey>('all')
+  const { locale, t } = useLanguage()
+
+  // Filter posts by locale
+  const localePosts = posts.filter((p) =>
+    p.tags?.some((tag) => tag.slug === locale)
+  )
 
   const filtered =
     activeTab === 'all'
-      ? posts
-      : posts.filter((p) => getTagSlug(p) === activeTab)
+      ? localePosts
+      : localePosts.filter((p) => getTagSlug(p) === activeTab)
 
   return (
     <>
@@ -107,8 +122,8 @@ export default function InsightsTabs({ posts }: { posts: GhostPost[] }) {
           {INSIGHT_TABS.map((tab) => {
             const count =
               tab.key === 'all'
-                ? posts.length
-                : posts.filter((p) => getTagSlug(p) === tab.key).length
+                ? localePosts.length
+                : localePosts.filter((p) => getTagSlug(p) === tab.key).length
             const isActive = activeTab === tab.key
 
             return (
@@ -120,7 +135,7 @@ export default function InsightsTabs({ posts }: { posts: GhostPost[] }) {
                   ${isActive ? 'text-white' : 'text-gray-500 hover:text-gray-300'}
                 `}
               >
-                {tab.label}
+                {t(`tab.${tab.key}`)}
                 <span className={`ml-2 ${isActive ? 'text-gray-400' : 'text-gray-600'}`}>
                   {count}
                 </span>
@@ -143,10 +158,10 @@ export default function InsightsTabs({ posts }: { posts: GhostPost[] }) {
       ) : (
         <div className="text-center py-24 border border-white/10">
           <p className="text-gray-400 text-lg font-serif">
-            No posts in this category yet
+            {t('insights.empty')}
           </p>
           <p className="text-gray-600 mt-2 font-mono text-sm">
-            Check back soon for updates
+            {t('insights.empty.sub')}
           </p>
         </div>
       )}
