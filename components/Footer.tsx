@@ -39,7 +39,6 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/10 text-[10px] md:text-xs text-gray-600 font-mono uppercase tracking-[0.1em]">
           <div>{t('footer.rights')}</div>
-          <div className="mt-4 md:mt-0">{t('footer.locations')}</div>
         </div>
       </div>
     </footer>
