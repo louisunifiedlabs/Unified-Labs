@@ -3,13 +3,22 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FluidGridBackground from '@/components/FluidGridBackground'
-import NewsPreview from '@/components/NewsPreview'
-import { getRecentPosts, SanityPost } from '@/lib/sanity'
+import InsightsPreview from '@/components/InsightsPreview'
+import { getRecentPosts, isGhostConfigured, DEMO_POSTS, GhostPost } from '@/lib/ghost'
 
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
-  const posts: SanityPost[] = await getRecentPosts(6)
+  let posts: GhostPost[] = []
+  if (isGhostConfigured()) {
+    try {
+      posts = await getRecentPosts(6)
+    } catch {
+      posts = DEMO_POSTS.slice(0, 6)
+    }
+  } else {
+    posts = DEMO_POSTS.slice(0, 6)
+  }
   return (
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
       <FluidGridBackground />
@@ -75,8 +84,8 @@ export default async function HomePage() {
       </section>
 
 
-      {/* --- NEWS PREVIEW SECTION --- */}
-      <section id="news" className="relative z-10 py-32">
+      {/* --- INSIGHTS PREVIEW SECTION --- */}
+      <section id="insights" className="relative z-10 py-32">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 border-b border-white/10 pb-8">
             <div>
@@ -85,11 +94,11 @@ export default async function HomePage() {
                 <span className="text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">Latest Updates</span>
               </div>
               <h2 className="text-4xl md:text-5xl font-serif font-bold">
-                News
+                Insights
               </h2>
             </div>
             <Link
-              href="/news"
+              href="/insights"
               className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors mt-6 md:mt-0"
             >
               View All
@@ -97,7 +106,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <NewsPreview posts={posts} />
+          <InsightsPreview posts={posts} />
         </div>
       </section>
 
