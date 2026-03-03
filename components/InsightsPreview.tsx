@@ -1,7 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock } from 'lucide-react'
 import { GhostPost } from '@/lib/ghost'
+import { useLanguage } from '@/lib/language'
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -11,8 +14,14 @@ function formatDate(dateString: string) {
   })
 }
 
+function getCategoryTag(post: GhostPost): string | null {
+  if (!post.tags || post.tags.length === 0) return null
+  const tag = post.tags.find((t) => t.slug !== 'en' && t.slug !== 'zh')
+  return tag?.name ?? null
+}
+
 function InsightCard({ post }: { post: GhostPost }) {
-  const tagLabel = post.tags?.[0]?.name ?? null
+  const tagLabel = getCategoryTag(post)
 
   return (
     <Link href={`/insights/${post.slug}`} className="group block">
@@ -25,7 +34,6 @@ function InsightCard({ post }: { post: GhostPost }) {
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             <div className="absolute bottom-4 left-4">
               {tagLabel && (
                 <span className="inline-block px-2 py-0.5 bg-white text-black text-[10px] font-mono uppercase tracking-wider">
@@ -74,7 +82,13 @@ function InsightCard({ post }: { post: GhostPost }) {
 }
 
 export default function InsightsPreview({ posts }: { posts: GhostPost[] }) {
-  if (posts.length === 0) {
+  const { locale } = useLanguage()
+
+  const filteredPosts = posts
+    .filter((post) => post.tags?.some((tag) => tag.slug === locale))
+    .slice(0, 6)
+
+  if (filteredPosts.length === 0) {
     return (
       <div className="text-center py-20 border border-white/10">
         <p className="text-gray-400 text-lg font-serif">No insights yet</p>
@@ -87,7 +101,7 @@ export default function InsightsPreview({ posts }: { posts: GhostPost[] }) {
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {posts.map((post) => (
+      {filteredPosts.map((post) => (
         <InsightCard key={post.id} post={post} />
       ))}
     </div>
