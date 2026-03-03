@@ -12,12 +12,12 @@ export default async function HomePage() {
   let posts: GhostPost[] = []
   if (isGhostConfigured()) {
     try {
-      posts = await getRecentPosts(6)
+      posts = await getRecentPosts(20)
     } catch {
-      posts = DEMO_POSTS.slice(0, 6)
+      posts = DEMO_POSTS
     }
   } else {
-    posts = DEMO_POSTS.slice(0, 6)
+    posts = DEMO_POSTS
   }
   return (
     <div className="bg-black min-h-screen text-white selection:bg-white selection:text-black overflow-x-hidden">
