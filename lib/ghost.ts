@@ -73,8 +73,11 @@ function ghostApi(resource: string, params: Record<string, string> = {}) {
 }
 
 async function fetchGhost<T>(url: string): Promise<T> {
+  console.log('[Ghost] Fetching:', url.replace(GHOST_KEY, '***'))
   const res = await fetch(url, { next: { revalidate: 60 } })
   if (!res.ok) {
+    const body = await res.text().catch(() => '')
+    console.error(`[Ghost] API error: ${res.status} ${res.statusText}`, body)
     throw new Error(`Ghost API error: ${res.status} ${res.statusText}`)
   }
   return res.json()
@@ -139,7 +142,9 @@ export async function getRecentPosts(limit = 6): Promise<GhostPost[]> {
  * Check if Ghost is configured (env vars present).
  */
 export function isGhostConfigured(): boolean {
-  return Boolean(GHOST_URL && GHOST_KEY)
+  const configured = Boolean(GHOST_URL && GHOST_KEY)
+  console.log('[Ghost] configured:', configured, 'URL:', GHOST_URL ? GHOST_URL : '(empty)', 'KEY:', GHOST_KEY ? '***' : '(empty)')
+  return configured
 }
 
 // ── Empty fallback when Ghost is not configured ─────────
