@@ -1,34 +1,24 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import { getPostBySlug, urlFor, SanityPost } from '@/lib/sanity'
-import { Calendar, ArrowLeft } from 'lucide-react'
+import {
+  getPostBySlug,
+  isGhostConfigured,
+  DEMO_POSTS,
+  GhostPost,
+} from '@/lib/ghost'
+import { Calendar, ArrowLeft, Clock } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PortableText } from '@portabletext/react'
 
 export const dynamic = 'force-dynamic'
 
-const portableTextComponents = {
-  types: {
-    image: ({ value }: any) => {
-      if (!value?.asset?._ref) return null
-      return (
-        <div className="my-8">
-          <Image
-            src={urlFor(value).width(1200).url()}
-            alt={value.caption || ''}
-            width={1200}
-            height={675}
-            className="w-full rounded"
-          />
-          {value.caption && (
-            <p className="text-center text-sm text-gray-500 mt-3">{value.caption}</p>
-          )}
-        </div>
-      )
-    },
-  },
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
 }
 
 export default async function NewsDetailPage({
@@ -36,20 +26,21 @@ export default async function NewsDetailPage({
 }: {
   params: { slug: string }
 }) {
-  const decodedSlug = decodeURIComponent(params.slug)
-  const post: SanityPost | null = await getPostBySlug(decodedSlug)
+  const slug = decodeURIComponent(params.slug)
+
+  let post: GhostPost | null = null
+
+  if (isGhostConfigured()) {
+    post = await getPostBySlug(slug)
+  } else {
+    post = DEMO_POSTS.find((p) => p.slug === slug) ?? null
+  }
 
   if (!post) {
     notFound()
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+  const tagLabel = post.tags?.[0]?.name ?? null
 
   return (
     <div className="bg-black min-h-screen text-white">
@@ -69,15 +60,19 @@ export default async function NewsDetailPage({
           {/* Header */}
           <header className="mb-12 border-b border-white/10 pb-8">
             <div className="flex items-center gap-4 text-xs text-gray-500 mb-6 font-mono uppercase tracking-wider">
-              {post.publishedAt && (
+              <span className="flex items-center gap-2">
+                <Calendar className="w-3 h-3" />
+                {formatDate(post.published_at)}
+              </span>
+              {post.reading_time > 0 && (
                 <span className="flex items-center gap-2">
-                  <Calendar className="w-3 h-3" />
-                  {formatDate(post.publishedAt)}
+                  <Clock className="w-3 h-3" />
+                  {post.reading_time} min read
                 </span>
               )}
-              {post.category && (
+              {tagLabel && (
                 <span className="px-2 py-0.5 border border-white/20 rounded">
-                  {post.category}
+                  {tagLabel}
                 </span>
               )}
             </div>
@@ -86,18 +81,18 @@ export default async function NewsDetailPage({
               {post.title}
             </h1>
 
-            {post.summary && (
+            {post.excerpt && (
               <p className="text-lg text-gray-400 mt-6 leading-relaxed">
-                {post.summary}
+                {post.excerpt}
               </p>
             )}
           </header>
 
           {/* Cover Image */}
-          {post.image && (
+          {post.feature_image && (
             <div className="relative h-64 md:h-96 overflow-hidden mb-12 border border-white/10">
               <Image
-                src={urlFor(post.image).width(1200).height(675).url()}
+                src={post.feature_image}
                 alt={post.title}
                 fill
                 className="object-cover"
@@ -106,11 +101,12 @@ export default async function NewsDetailPage({
             </div>
           )}
 
-          {/* Content */}
-          {post.content && (
-            <div className="prose prose-lg prose-invert max-w-none">
-              <PortableText value={post.content} components={portableTextComponents} />
-            </div>
+          {/* Content — Ghost returns HTML */}
+          {post.html && (
+            <div
+              className="prose prose-lg prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: post.html }}
+            />
           )}
 
           {/* Footer Navigation */}
