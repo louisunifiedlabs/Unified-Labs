@@ -3,6 +3,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FluidGridBackground from '@/components/FluidGridBackground'
+import ServicesSection from '@/components/ServicesSection'
 import InsightsPreview from '@/components/InsightsPreview'
 import { getRecentPosts, isGhostConfigured, DEMO_POSTS, GhostPost } from '@/lib/ghost'
 
@@ -83,6 +84,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+
+      {/* --- SERVICES SECTION --- */}
+      <ServicesSection />
 
       {/* --- INSIGHTS PREVIEW SECTION --- */}
       <section id="insights" className="relative z-10 py-32">

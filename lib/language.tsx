@@ -43,6 +43,25 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Reading
     'reading.min': 'min read',
+
+    // Services
+    'services.badge': 'What We Do',
+    'services.title': 'Our Expertise',
+    'services.build.title': 'Build products',
+    'services.build.desc': 'Build institutional-grade stablecoin and yield products that embed directly into your app, exchange, or platform backend.',
+    'services.build.p1': 'Ship branded stablecoin savings with onchain-verifiable yield sources and clearly tiered risk',
+    'services.build.p2': 'Deploy multi-currency, risk-tiered vaults that convert idle balances and lift user retention',
+    'services.build.p3': 'Wire curated DeFi vaults into your existing product stack via APIs or smart contracts',
+    'services.yield.title': 'Earn yield',
+    'services.yield.desc': 'Enter a network of risk-vetted DeFi vaults to allocate capital into diversified strategies — non-custodial, transparent, and built to institutional standards.',
+    'services.yield.p1': 'Position treasury or fund capital in institutional stablecoin vaults secured by blue-chip collateral',
+    'services.yield.p2': 'Tap into underwritten, diversified strategies across tokenized funds, tokenized treasuries, and other RWAs',
+    'services.yield.p3': 'Run allocations automatically through dashboards or onchain rails, with every exposure verifiable onchain',
+    'services.advisory.title': 'Advisory',
+    'services.advisory.desc': 'Partner with our specialist team to design, underwrite, and execute RWA, stablecoin, and tokenized asset strategies — from concept to deployment.',
+    'services.advisory.p1': 'Map out RWA and stablecoin product strategy, from opportunity discovery to product definition',
+    'services.advisory.p2': 'Structure and underwrite tokenized assets and credit products for DeFi listing and distribution',
+    'services.advisory.p3': 'Build protocol or treasury economic models, delivered as executable onchain configurations',
   },
   zh: {
     // Nav
@@ -76,6 +95,25 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Reading
     'reading.min': '分钟阅读',
+
+    // Services
+    'services.badge': '核心业务',
+    'services.title': '我们的专业领域',
+    'services.build.title': '构建产品',
+    'services.build.desc': '打造机构级的稳定币与收益产品，直接嵌入你的 App、交易所或平台后端。',
+    'services.build.p1': '推出品牌化的稳定币储蓄产品，收益来源链上可溯，风险分层一目了然',
+    'services.build.p2': '交付多币种的风险分级 Vault，转化闲置余额并提升用户粘性',
+    'services.build.p3': '通过 API 或智能合约，将经过风控审核的 DeFi Vault 嵌进你现有的产品栈',
+    'services.yield.title': '获取收益',
+    'services.yield.desc': '进入经风控审核的 DeFi Vault 体系，以非托管、透明、机构级的方式把资金部署到多元化策略中。',
+    'services.yield.p1': '将财库或基金资金配置至蓝筹抵押支持的机构级稳定币 Vault',
+    'services.yield.p2': '接入经承销审核的多元收益策略，覆盖代币化基金、代币化美债与其他 RWA 资产',
+    'services.yield.p3': '配置通过仪表盘或链上通道自动执行，每一笔敞口链上可验证',
+    'services.advisory.title': '顾问服务',
+    'services.advisory.desc': '与我们的专业团队共同设计、承销并落地 RWA、稳定币与代币化资产策略，从构想到上链一站贯通。',
+    'services.advisory.p1': '制定 RWA 与稳定币产品的整体路径，从机会识别走到产品定型',
+    'services.advisory.p2': '结构化并承销代币化资产或信贷产品，使其具备 DeFi 上架与分销条件',
+    'services.advisory.p3': '为协议或财库建立经济模型，输出可直接部署的链上配置方案',
   },
 }
 
