@@ -50,7 +50,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'clients.challenge': 'The Challenge',
     'clients.solution': 'The Solution',
     'clients.results': 'The Results',
-    'clients.related': 'More in this group',
+    'clients.related': 'More clients',
 
     // Footer
     'footer.tagline': 'Bridging Institutions to Onchain Finance.',
@@ -120,7 +120,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'clients.challenge': '挑战',
     'clients.solution': '方案',
     'clients.results': '成果',
-    'clients.related': '同类客户',
+    'clients.related': '更多合作方',
 
     // Footer
     'footer.tagline': '连接机构与链上金融。',
