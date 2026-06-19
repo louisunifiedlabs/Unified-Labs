@@ -39,17 +39,15 @@ const translations: Record<Locale, Record<string, string>> = {
     'clients.badge': 'Clients & Ecosystem',
     'clients.title': 'Who builds with Unified Labs',
     'clients.subtitle': 'From asset issuers bringing products onchain to the platforms distributing them — the partners building with Unified Labs.',
-    'clients.preview.note': 'Preview — these are placeholder clients. Replace with real, authorized names before launch.',
-    'clients.viewCase': 'View case',
+    'clients.empty': 'No clients to show yet',
+    'clients.empty.sub': 'Publish a post tagged “client” in Ghost (with an en/zh tag and a category tag) and it will appear here.',
+    'clients.empty.unconfigured': 'Connect Ghost (NEXT_PUBLIC_GHOST_URL + key) to manage clients here.',
     'clients.cta.title': 'Become a partner',
     'clients.cta.desc': 'Bring institutional-grade onchain products to your users — or put your capital to work.',
     'clients.cta.button': 'Talk to us',
 
     // Client detail
     'clients.back': 'Back to Clients',
-    'clients.challenge': 'The Challenge',
-    'clients.solution': 'The Solution',
-    'clients.results': 'The Results',
     'clients.related': 'More clients',
 
     // Footer
@@ -109,17 +107,15 @@ const translations: Record<Locale, Record<string, string>> = {
     'clients.badge': '客户与生态',
     'clients.title': '与 Unified Labs 同行的伙伴',
     'clients.subtitle': '从把资产带上链的发行方，到分发这些产品的平台——这些都是与 Unified Labs 共建的合作伙伴。',
-    'clients.preview.note': '预览模式 — 以下为占位客户，正式上线前请替换为已获授权的真实名称。',
-    'clients.viewCase': '查看案例',
+    'clients.empty': '暂无客户展示',
+    'clients.empty.sub': '在 Ghost 后台发布一篇打了 “client” 标签的文章（再加 en/zh 标签和一个分类标签），即可显示在这里。',
+    'clients.empty.unconfigured': '连接 Ghost（NEXT_PUBLIC_GHOST_URL + 密钥）后即可在此管理客户。',
     'clients.cta.title': '成为合作伙伴',
     'clients.cta.desc': '为你的用户带来机构级链上产品，或让你的资金高效运转。',
     'clients.cta.button': '与我们联系',
 
     // Client detail
     'clients.back': '返回客户',
-    'clients.challenge': '挑战',
-    'clients.solution': '方案',
-    'clients.results': '成果',
     'clients.related': '更多合作方',
 
     // Footer

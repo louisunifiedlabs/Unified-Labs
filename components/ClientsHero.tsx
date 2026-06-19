@@ -17,11 +17,6 @@ export default function ClientsHero() {
         <p className="mt-6 text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed font-light">
           {t('clients.subtitle')}
         </p>
-
-        {/* Preview-only notice — remove once real clients are in place */}
-        <div className="mt-8 inline-block px-4 py-2 border border-white/15 text-gray-400 text-xs">
-          {t('clients.preview.note')}
-        </div>
       </div>
     </section>
   )

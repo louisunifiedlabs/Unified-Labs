@@ -138,6 +138,39 @@ export async function getRecentPosts(limit = 6): Promise<GhostPost[]> {
   return getPosts(undefined, limit)
 }
 
+// ── Clients showcase ───────────────────────────────────
+// A "client" is any post tagged `client`. Tag each post with:
+//   client + (en | zh) + a category tag (e.g. exchange, wallet, rwa)
+// Card  = feature_image + category tag + title + excerpt
+// Detail = the rendered post body (post.html)
+
+export const CLIENT_TAG = 'client'
+
+/** Fetch all client posts (both locales). Filter by locale in the UI. */
+export async function getClientPosts(limit = 100): Promise<GhostPost[]> {
+  return getPosts(CLIENT_TAG, limit)
+}
+
+/** The category tag for a client (excludes language + the `client` marker). */
+export function getClientCategory(post: GhostPost): GhostTag | null {
+  return (
+    post.tags?.find(
+      (t) => t.slug !== 'en' && t.slug !== 'zh' && t.slug !== CLIENT_TAG
+    ) ?? null
+  )
+}
+
+/** The locale slug (en/zh) a post is tagged with, if any. */
+export function getPostLocale(post: GhostPost): string | null {
+  return post.tags?.find((t) => t.slug === 'en' || t.slug === 'zh')?.slug ?? null
+}
+
+/** Whether a post is a client showcase entry. */
+export function isClientPost(post: GhostPost): boolean {
+  return post.tags?.some((t) => t.slug === CLIENT_TAG) ?? false
+}
+
+
 /**
  * Check if Ghost is configured (env vars present).
  */

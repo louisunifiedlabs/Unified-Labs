@@ -2,21 +2,40 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { getClients } from '@/lib/clients'
+import { GhostPost } from '@/lib/ghost'
 import { useLanguage } from '@/lib/language'
 import ClientTile from './ClientTile'
 
-export default function ClientsShowcase() {
-  const { t } = useLanguage()
-  const clients = getClients()
+export default function ClientsShowcase({
+  posts,
+  ghostConfigured,
+}: {
+  posts: GhostPost[]
+  ghostConfigured: boolean
+}) {
+  const { locale, t } = useLanguage()
+
+  // Show only the posts tagged with the current language (same as Insights).
+  const clients = posts.filter((p) =>
+    p.tags?.some((tag) => tag.slug === locale)
+  )
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-20">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {clients.map((client) => (
-          <ClientTile key={client.slug} client={client} />
-        ))}
-      </div>
+      {clients.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {clients.map((post) => (
+            <ClientTile key={post.id} post={post} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-24 border border-white/10">
+          <p className="text-gray-400 text-lg font-serif">{t('clients.empty')}</p>
+          <p className="text-gray-600 mt-2 text-sm max-w-md mx-auto">
+            {ghostConfigured ? t('clients.empty.sub') : t('clients.empty.unconfigured')}
+          </p>
+        </div>
+      )}
 
       {/* CTA */}
       <section className="mt-32 text-center border-t border-white/10 pt-20">

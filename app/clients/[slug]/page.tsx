@@ -1,34 +1,63 @@
 import { notFound } from 'next/navigation'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import ClientStory from '@/components/ClientStory'
-import { getClientBySlug, getClients } from '@/lib/clients'
+import ClientArticle from '@/components/ClientArticle'
+import {
+  getPostBySlug,
+  getClientPosts,
+  isClientPost,
+  getPostLocale,
+  isGhostConfigured,
+  GhostPost,
+} from '@/lib/ghost'
 
-export function generateStaticParams() {
-  return getClients().map((c) => ({ slug: c.slug }))
-}
+export const dynamic = 'force-dynamic'
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const client = getClientBySlug(decodeURIComponent(params.slug))
-  if (!client) return { title: 'Client — Unified Labs' }
-  return {
-    title: `${client.name} — Unified Labs`,
-    description: client.story.summary.en,
-  }
-}
-
-export default function ClientDetailPage({
+export async function generateMetadata({
   params,
 }: {
   params: { slug: string }
 }) {
-  const client = getClientBySlug(decodeURIComponent(params.slug))
-  if (!client) notFound()
+  if (!isGhostConfigured()) return { title: 'Client — Unified Labs' }
+  const post = await getPostBySlug(decodeURIComponent(params.slug))
+  if (!post) return { title: 'Client — Unified Labs' }
+  return {
+    title: `${post.title} — Unified Labs`,
+    description: post.excerpt ?? undefined,
+  }
+}
+
+export default async function ClientDetailPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const slug = decodeURIComponent(params.slug)
+
+  const post = isGhostConfigured() ? await getPostBySlug(slug) : null
+  // Only render posts that are actually client showcase entries.
+  if (!post || !isClientPost(post)) notFound()
+
+  // Related: other clients in the same language.
+  const localeTag = getPostLocale(post)
+  let related: GhostPost[] = []
+  try {
+    const all = await getClientPosts()
+    related = all
+      .filter(
+        (p) =>
+          p.slug !== post.slug &&
+          (!localeTag || p.tags?.some((t) => t.slug === localeTag))
+      )
+      .slice(0, 3)
+  } catch {
+    related = []
+  }
 
   return (
     <div className="bg-black min-h-screen text-white">
       <Nav />
-      <ClientStory client={client} />
+      <ClientArticle post={post} related={related} />
       <Footer />
     </div>
   )
