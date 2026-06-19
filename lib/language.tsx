@@ -14,6 +14,7 @@ const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Nav
     'nav.insights': 'Insights',
+    'nav.stories': 'Stories',
     'nav.about': 'About',
     'nav.docs': 'Docs',
     'nav.contact': 'Contact Us',
@@ -33,6 +34,33 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.research': 'Research',
     'tab.market-decoded': 'Market Decoded',
     'tab.events': 'Events',
+
+    // Stories / Customer cases
+    'stories.badge': 'Customer Stories',
+    'stories.title': 'Built on Unified Labs',
+    'stories.subtitle': 'How exchanges, wallets, fintechs, and institutions deploy capital onchain with Unified Labs.',
+    'stories.preview.note': 'Preview — these are placeholder case studies. Replace with real, authorized stories before launch.',
+    'stories.featured': 'Featured Story',
+    'stories.read': 'Read story',
+    'stories.empty': 'No stories in this category yet',
+    'stories.trusted': 'Trusted by teams across the ecosystem',
+    'stories.cta.title': 'Become a partner',
+    'stories.cta.desc': 'Bring institutional-grade onchain products to your users — or put your capital to work.',
+    'stories.cta.button': 'Talk to us',
+
+    // Story categories
+    'story.cat.all': 'All',
+    'story.cat.exchange': 'Exchanges',
+    'story.cat.wallet': 'Wallets',
+    'story.cat.institution': 'Institutions',
+    'story.cat.fintech': 'Fintech',
+
+    // Story detail
+    'story.back': 'Back to Stories',
+    'story.challenge': 'The Challenge',
+    'story.solution': 'The Solution',
+    'story.results': 'The Results',
+    'story.related': 'More stories',
 
     // Footer
     'footer.tagline': 'Bridging Institutions to Onchain Finance.',
@@ -66,6 +94,7 @@ const translations: Record<Locale, Record<string, string>> = {
   zh: {
     // Nav
     'nav.insights': '洞察',
+    'nav.stories': '客户案例',
     'nav.about': '关于我们',
     'nav.docs': '文档',
     'nav.contact': '联系我们',
@@ -85,6 +114,33 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.research': '研究报告',
     'tab.market-decoded': '市场解读',
     'tab.events': '活动',
+
+    // Stories / Customer cases
+    'stories.badge': '客户案例',
+    'stories.title': '基于 Unified Labs 构建',
+    'stories.subtitle': '交易所、钱包、金融科技与机构如何借助 Unified Labs 在链上配置资金。',
+    'stories.preview.note': '预览模式 — 以下为占位案例，正式上线前请替换为已获授权的真实案例。',
+    'stories.featured': '旗舰案例',
+    'stories.read': '查看案例',
+    'stories.empty': '该分类下暂无案例',
+    'stories.trusted': '生态伙伴的信赖之选',
+    'stories.cta.title': '成为合作伙伴',
+    'stories.cta.desc': '为你的用户带来机构级链上产品，或让你的资金高效运转。',
+    'stories.cta.button': '与我们联系',
+
+    // Story categories
+    'story.cat.all': '全部',
+    'story.cat.exchange': '交易所',
+    'story.cat.wallet': '钱包',
+    'story.cat.institution': '机构',
+    'story.cat.fintech': '金融科技',
+
+    // Story detail
+    'story.back': '返回客户案例',
+    'story.challenge': '挑战',
+    'story.solution': '方案',
+    'story.results': '成果',
+    'story.related': '更多案例',
 
     // Footer
     'footer.tagline': '连接机构与链上金融。',

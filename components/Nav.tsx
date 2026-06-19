@@ -23,6 +23,7 @@ export default function Nav() {
 
   const navItems = [
     { name: t('nav.insights'), href: '/insights' },
+    { name: t('nav.stories'), href: '/stories' },
     { name: t('nav.about'), href: '/about' },
     { name: t('nav.docs'), href: '/docs', external: true },
   ]
