@@ -14,7 +14,7 @@ const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Nav
     'nav.insights': 'Insights',
-    'nav.clients': 'Clients',
+    'nav.clients': 'Case Studies',
     'nav.about': 'About',
     'nav.docs': 'Docs',
     'nav.contact': 'Contact Us',
@@ -36,19 +36,19 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.events': 'Events',
 
     // Clients / Ecosystem showcase
-    'clients.badge': 'Clients & Ecosystem',
+    'clients.badge': 'Case Studies',
     'clients.title': 'Who builds with Unified Labs',
     'clients.subtitle': 'From asset issuers bringing products onchain to the platforms distributing them — the partners building with Unified Labs.',
-    'clients.empty': 'No clients to show yet',
+    'clients.empty': 'No case studies to show yet',
     'clients.empty.sub': 'Publish a post tagged “client” in Ghost (with an en/zh tag and a category tag) and it will appear here.',
-    'clients.empty.unconfigured': 'Connect Ghost (NEXT_PUBLIC_GHOST_URL + key) to manage clients here.',
+    'clients.empty.unconfigured': 'Connect Ghost (NEXT_PUBLIC_GHOST_URL + key) to manage case studies here.',
     'clients.cta.title': 'Become a partner',
     'clients.cta.desc': 'Bring institutional-grade onchain products to your users — or put your capital to work.',
     'clients.cta.button': 'Talk to us',
 
     // Client detail
-    'clients.back': 'Back to Clients',
-    'clients.related': 'More clients',
+    'clients.back': 'Back to Case Studies',
+    'clients.related': 'More case studies',
 
     // Footer
     'footer.tagline': 'Bridging Institutions to Onchain Finance.',
@@ -82,7 +82,7 @@ const translations: Record<Locale, Record<string, string>> = {
   zh: {
     // Nav
     'nav.insights': '洞察',
-    'nav.clients': '客户',
+    'nav.clients': '案例',
     'nav.about': '关于我们',
     'nav.docs': '文档',
     'nav.contact': '联系我们',
@@ -104,19 +104,19 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.events': '活动',
 
     // Clients / Ecosystem showcase
-    'clients.badge': '客户与生态',
+    'clients.badge': '案例',
     'clients.title': '与 Unified Labs 同行的伙伴',
     'clients.subtitle': '从把资产带上链的发行方，到分发这些产品的平台——这些都是与 Unified Labs 共建的合作伙伴。',
-    'clients.empty': '暂无客户展示',
+    'clients.empty': '暂无案例展示',
     'clients.empty.sub': '在 Ghost 后台发布一篇打了 “client” 标签的文章（再加 en/zh 标签和一个分类标签），即可显示在这里。',
-    'clients.empty.unconfigured': '连接 Ghost（NEXT_PUBLIC_GHOST_URL + 密钥）后即可在此管理客户。',
+    'clients.empty.unconfigured': '连接 Ghost（NEXT_PUBLIC_GHOST_URL + 密钥）后即可在此管理案例。',
     'clients.cta.title': '成为合作伙伴',
     'clients.cta.desc': '为你的用户带来机构级链上产品，或让你的资金高效运转。',
     'clients.cta.button': '与我们联系',
 
     // Client detail
-    'clients.back': '返回客户',
-    'clients.related': '更多合作方',
+    'clients.back': '返回案例',
+    'clients.related': '更多案例',
 
     // Footer
     'footer.tagline': '连接机构与链上金融。',

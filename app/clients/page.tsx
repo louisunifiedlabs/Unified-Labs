@@ -7,7 +7,7 @@ import { getClientPosts, isGhostConfigured, GhostPost } from '@/lib/ghost'
 export const dynamic = 'force-dynamic'
 
 export const metadata = {
-  title: 'Clients — Unified Labs',
+  title: 'Case Studies — Unified Labs',
   description:
     'The asset issuers, platforms, and institutions building with Unified Labs.',
 }

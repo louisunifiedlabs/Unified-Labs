@@ -18,9 +18,9 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }) {
-  if (!isGhostConfigured()) return { title: 'Client — Unified Labs' }
+  if (!isGhostConfigured()) return { title: 'Case Study — Unified Labs' }
   const post = await getPostBySlug(decodeURIComponent(params.slug))
-  if (!post) return { title: 'Client — Unified Labs' }
+  if (!post) return { title: 'Case Study — Unified Labs' }
   return {
     title: `${post.title} — Unified Labs`,
     description: post.excerpt ?? undefined,
