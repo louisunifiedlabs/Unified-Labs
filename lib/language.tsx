@@ -38,7 +38,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Clients / Ecosystem showcase
     'clients.badge': 'Case Studies',
     'clients.title': 'How partners build with Unified Labs',
-    'clients.subtitle': 'A closer look at how asset issuers and distribution platforms bring institutional-grade onchain products to market with Unified Labs.',
+    'clients.subtitle': 'A closer look at how partners bring institutional-grade onchain products to market with Unified Labs.',
     'clients.empty': 'No case studies to show yet',
     'clients.empty.sub': 'Publish a post tagged “client” in Ghost (with an en/zh tag and a category tag) and it will appear here.',
     'clients.empty.unconfigured': 'Connect Ghost (NEXT_PUBLIC_GHOST_URL + key) to manage case studies here.',
@@ -106,7 +106,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Clients / Ecosystem showcase
     'clients.badge': '案例',
     'clients.title': '合作伙伴如何与 Unified Labs 共建',
-    'clients.subtitle': '深入了解资产发行方与分发平台如何携手 Unified Labs，将机构级链上产品推向市场。',
+    'clients.subtitle': '深入了解合作伙伴如何携手 Unified Labs，将机构级链上产品推向市场。',
     'clients.empty': '暂无案例展示',
     'clients.empty.sub': '在 Ghost 后台发布一篇打了 “client” 标签的文章（再加 en/zh 标签和一个分类标签），即可显示在这里。',
     'clients.empty.unconfigured': '连接 Ghost（NEXT_PUBLIC_GHOST_URL + 密钥）后即可在此管理案例。',
