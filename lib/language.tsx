@@ -14,6 +14,7 @@ const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Nav
     'nav.insights': 'Insights',
+    'nav.clients': 'Case Studies',
     'nav.about': 'About',
     'nav.docs': 'Docs',
     'nav.contact': 'Contact Us',
@@ -33,6 +34,21 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.research': 'Research',
     'tab.market-decoded': 'Market Decoded',
     'tab.events': 'Events',
+
+    // Clients / Ecosystem showcase
+    'clients.badge': 'Case Studies',
+    'clients.title': 'How partners build with Unified Labs',
+    'clients.subtitle': 'A closer look at how partners bring institutional-grade onchain products to market with Unified Labs.',
+    'clients.empty': 'No case studies to show yet',
+    'clients.empty.sub': 'Publish a post tagged “client” in Ghost (with an en/zh tag and a category tag) and it will appear here.',
+    'clients.empty.unconfigured': 'Connect Ghost (NEXT_PUBLIC_GHOST_URL + key) to manage case studies here.',
+    'clients.cta.title': 'Become a partner',
+    'clients.cta.desc': 'Bring institutional-grade onchain products to your users — or put your capital to work.',
+    'clients.cta.button': 'Talk to us',
+
+    // Client detail
+    'clients.back': 'Back to Case Studies',
+    'clients.related': 'More case studies',
 
     // Footer
     'footer.tagline': 'Bridging Institutions to Onchain Finance.',
@@ -66,6 +82,7 @@ const translations: Record<Locale, Record<string, string>> = {
   zh: {
     // Nav
     'nav.insights': '洞察',
+    'nav.clients': '案例',
     'nav.about': '关于我们',
     'nav.docs': '文档',
     'nav.contact': '联系我们',
@@ -85,6 +102,21 @@ const translations: Record<Locale, Record<string, string>> = {
     'tab.research': '研究报告',
     'tab.market-decoded': '市场解读',
     'tab.events': '活动',
+
+    // Clients / Ecosystem showcase
+    'clients.badge': '案例',
+    'clients.title': '合作伙伴如何与 Unified Labs 共建',
+    'clients.subtitle': '深入了解合作伙伴如何携手 Unified Labs，将机构级链上产品推向市场。',
+    'clients.empty': '暂无案例展示',
+    'clients.empty.sub': '在 Ghost 后台发布一篇打了 “client” 标签的文章（再加 en/zh 标签和一个分类标签），即可显示在这里。',
+    'clients.empty.unconfigured': '连接 Ghost（NEXT_PUBLIC_GHOST_URL + 密钥）后即可在此管理案例。',
+    'clients.cta.title': '成为合作伙伴',
+    'clients.cta.desc': '为你的用户带来机构级链上产品，或让你的资金高效运转。',
+    'clients.cta.button': '与我们联系',
+
+    // Client detail
+    'clients.back': '返回案例',
+    'clients.related': '更多案例',
 
     // Footer
     'footer.tagline': '连接机构与链上金融。',
